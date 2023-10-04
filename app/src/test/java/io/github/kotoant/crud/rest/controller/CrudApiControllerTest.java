@@ -40,7 +40,7 @@ class CrudApiControllerTest extends BaseTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
     @Timeout(20)
-    void searchAccidents_Pagination(int pageSize) throws Exception {
+    void searchOrders_Pagination(int pageSize) throws Exception {
         insertOrderData();
 
         scrollForwardAndBack(pageSize, 10);

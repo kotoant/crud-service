@@ -10,7 +10,7 @@ import java.util.Base64;
 import java.util.UUID;
 
 public record OrderPreviewPageToken(
-        @JsonProperty("closed") Instant created,
+        @JsonProperty("created") Instant created,
         @JsonProperty("publicId") UUID publicId,
         @JsonProperty("pageSize") Integer pageSize
 ) {

@@ -36,7 +36,6 @@ paths:
           description: Server error.
       summary: Search accidents
       tags:
-      - crud
       - orders
 components:
   schemas:

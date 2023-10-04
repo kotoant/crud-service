@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Validated
 @RequestMapping("/api")
-@Tag(name = "crud")
 public interface CrudApi {
 
     @Operation(

@@ -1,0 +1,59 @@
+RETRY_PROPERTIES: classpath:retry.properties
+
+# https://springdoc.org/
+springdoc:
+  writer-with-default-pretty-printer: true
+  writer-with-order-by-keys: true
+
+# Actuator
+management.endpoints.web.exposure.include: "*"
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+        add-additional-paths: true
+  info:
+    defaults:
+      enabled: true
+    os:
+      enabled: true
+    java:
+      enabled: true
+    git:
+      enabled: true
+    build:
+      enabled: true
+    env:
+      enabled: true
+
+server:
+  port: 8080
+  servlet:
+    context-path: /crud/
+  forward-headers-strategy: framework
+
+spring:
+  web:
+    locale-resolver: fixed
+    locale: en
+  main:
+    web-application-type: servlet
+  codec:
+    maxInMemorySize: 10MB
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost:5432}/${DB_NAME:kdr}?currentSchema=${DB_SCHEMA:crud_app}
+    hikari:
+      pool-name: spring-hikari
+      username: ${DB_USERNAME:crud_app}
+      password: ${DB_PASSWORD:crud_app}
+      connection-timeout: 30000 # 30 seconds
+      idle-timeout: 300000 # 5 minutes
+      max-lifetime: 1800000 # 30 minutes
+      connection-test-query: select 1
+      minimum-idle: 10
+      maximum-pool-size: 20
+
+logging:
+  level:
+    ROOT: INFO

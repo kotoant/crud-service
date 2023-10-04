@@ -1,0 +1,173 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: https://openapi-test.crud.kotoant.github.io
+paths:
+  /api/orders/search:
+    post:
+      description: Search accidents.
+      operationId: searchOrders
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchOrdersRequestDto'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchOrdersResponseDto'
+          description: Response with search result.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Bad request.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+          description: Server error.
+      summary: Search accidents
+      tags:
+      - crud
+      - orders
+components:
+  schemas:
+    DateDto:
+      type: object
+      description: дата
+      nullable: true
+      properties:
+        day:
+          type: integer
+          format: int32
+          description: день
+          maximum: 31
+          minimum: 1
+        month:
+          type: integer
+          format: int32
+          description: месяц
+          maximum: 12
+          minimum: 1
+        year:
+          type: integer
+          format: int32
+          description: год
+      required:
+      - day
+      - month
+      - year
+    OrderPreviewDto:
+      type: object
+      description: Превью заказа
+      properties:
+        created:
+          type: string
+          description: Дата и время создания заказа
+        id:
+          type: string
+          format: uuid
+          description: Идентификатор заказа
+          example: 609c8abc-0882-485c-a03c-272032a41132
+        status:
+          $ref: '#/components/schemas/OrderStatusDto'
+    OrderStatusDto:
+      type: string
+      description: Статус заказа
+      enum:
+      - UNKNOWN
+      - ACTIVE
+      - INACTIVE
+      example: ACTIVE
+    PeriodDto:
+      type: object
+      default: {}
+      description: период
+      nullable: true
+      properties:
+        begin:
+          $ref: '#/components/schemas/DateDto'
+        end:
+          $ref: '#/components/schemas/DateDto'
+    ProblemDetail:
+      type: object
+      properties:
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri
+        properties:
+          type: object
+          additionalProperties:
+            type: object
+        status:
+          type: integer
+          format: int32
+        title:
+          type: string
+        type:
+          type: string
+          format: uri
+    SearchOrdersRequestDto:
+      type: object
+      description: Запрос на поиск заказов
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+          default: 10
+          description: Размер страницы
+          example: 10
+          maximum: 10
+          minimum: 1
+          nullable: true
+        pageToken:
+          type: string
+          description: Токен страницы
+          example: MTAwNTAw
+          nullable: true
+        period:
+          $ref: '#/components/schemas/PeriodDto'
+        statusFilter:
+          $ref: '#/components/schemas/StatusFilterDto'
+      required:
+      - pageSize
+      - period
+      - statusFilter
+    SearchOrdersResponseDto:
+      type: object
+      description: Ответ на поиск заказов
+      properties:
+        content:
+          type: array
+          description: Список превью инцидентов
+          items:
+            $ref: '#/components/schemas/OrderPreviewDto'
+        nextPageToken:
+          type: string
+          description: Токен следующей страницы
+          example: MTAwNTAwMDAwMDAwMA==
+          nullable: true
+        prevPageToken:
+          type: string
+          description: Токен предыдущей страницы
+          example: MTIzNDU2Nzg5MA==
+          nullable: true
+    StatusFilterDto:
+      type: string
+      default: ACTIVE
+      description: Фильтр по статусу
+      enum:
+      - ACTIVE
+      - ALL
+      example: ACTIVE
+      nullable: true

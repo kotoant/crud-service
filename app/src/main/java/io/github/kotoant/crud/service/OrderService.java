@@ -18,7 +18,7 @@ import java.util.function.Supplier;
 @Service
 @RequiredArgsConstructor
 public class OrderService {
-    private final OrderTransactionalService accidentTransactionalService;
+    private final OrderTransactionalService orderTransactionalService;
     private final Supplier<Clock> clockSupplier;
 
 
@@ -40,7 +40,7 @@ public class OrderService {
                         .plusDays(1).toInstant();
             }
         }
-        return accidentTransactionalService.searchOrders(
+        return orderTransactionalService.searchOrders(
                 beginInclusive, endExclusive, filter.statusFilter(), filter.pageSize(), filter.pageToken()
         );
     }

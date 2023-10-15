@@ -22,9 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface CrudApi {
 
     @Operation(
-            summary = "Search accidents",
+            summary = "Search orders.",
             operationId = "searchOrders",
-            description = "Search accidents.",
+            description = "Search orders.",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Response with search result.",
                             content = @Content(schema = @Schema(implementation = SearchOrdersResponseDto.class))),

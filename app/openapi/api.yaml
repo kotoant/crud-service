@@ -7,7 +7,7 @@ servers:
 paths:
   /api/orders/search:
     post:
-      description: Search accidents.
+      description: Search orders.
       operationId: searchOrders
       requestBody:
         content:
@@ -34,7 +34,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProblemDetail'
           description: Server error.
-      summary: Search accidents
+      summary: Search orders.
       tags:
       - orders
 components:

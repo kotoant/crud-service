@@ -43,6 +43,7 @@ public class OpenapiApplicationTest {
 
         var generatedFile = GENERATED_DIR.resolve(FILE_NAME);
         saveFile(generatedFile, actual);
+        actual = loadFile(generatedFile);
 
         var expected = loadFile(OPENAPI_DIR.resolve(FILE_NAME));
         assertEquals(expected, actual, "Generated file does not match reference file: " + FILE_NAME);

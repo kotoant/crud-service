@@ -18,7 +18,7 @@ public final class TestUtils {
     public static void saveFile(Path path, String data) {
         try {
             Files.createDirectories(path.getParent());
-            Files.writeString(path, data, StandardCharsets.UTF_8);
+            Files.writeString(path, data.replaceAll("\\n", System.lineSeparator()), StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

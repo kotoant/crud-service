@@ -51,8 +51,6 @@ public class BaseTestcontainersTest {
         System.setProperty("DB_NAME", dbName);
         System.setProperty("DB_USERNAME", dbUsername);
         System.setProperty("DB_PASSWORD", dbPassword);
-        System.setProperty("LB_USERNAME", dbUsername);
-        System.setProperty("LB_PASSWORD", dbPassword);
 
         waitForPostgres();
 

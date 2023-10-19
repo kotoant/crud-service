@@ -40,13 +40,13 @@ class CrudApiControllerTest extends BaseTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
     @Timeout(20)
-    void searchOrders_Pagination(int pageSize) throws Exception {
+    void searchOrders_Pagination(int pageSize) {
         insertOrderData();
 
         scrollForwardAndBack(pageSize, 10);
     }
 
-    private void scrollForwardAndBack(int pageSize, int expectedElementsCount) throws Exception {
+    private void scrollForwardAndBack(int pageSize, int expectedElementsCount) {
         SearchOrdersRequestDto request = SearchOrdersRequestDto.builder()
                 .statusFilter(StatusFilterDto.ALL)
                 .pageSize(pageSize)
@@ -55,6 +55,11 @@ class CrudApiControllerTest extends BaseTest {
         String prevPageToken;
         int lastPageContentSize;
         int actualElementsCount = 0;
+        log.info("""
+                                
+                ---------------------
+                - Scrolling forward -
+                ---------------------""");
         do {
             SearchOrdersResponseDto response = webClient
                     .post()
@@ -102,11 +107,21 @@ class CrudApiControllerTest extends BaseTest {
             assertThat(pageToken).isNotNull();
 
             // add one extra order for scroll back
+            log.info("""
+                                        
+                    ---------------------------------------------
+                    - Inserting one more order at the beginning -
+                    ---------------------------------------------""");
             Instant now = Instant.now();
             orderDao.insert(new Order(11L, UUID.randomUUID(), 1, true, now, now, now, 1));
             expectedElementsCount++;
 
             actualElementsCount = lastPageContentSize;
+            log.info("""
+                                        
+                    ---------------------
+                    - Scrolling back    -
+                    ---------------------""");
             do {
                 SearchOrdersResponseDto response = webClient
                         .post()

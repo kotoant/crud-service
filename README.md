@@ -230,4 +230,6 @@ Swagger UI здесь: [http://localhost:8080/crud/swagger-ui/index.html](http:/
 
 ###### **OpenAPI файл**
 
-OpenAPI файл доступен по адресу [http://localhost:8080/crud/v3/api-docs](http://localhost:8080/crud/v3/api-docs).
+OpenAPI файл в json формате доступен по
+адресу [http://localhost:8080/crud/v3/api-docs](http://localhost:8080/crud/v3/api-docs),
+в yaml формате - [http://localhost:8080/crud/v3/api-docs.yaml](http://localhost:8080/crud/v3/api-docs.yaml).

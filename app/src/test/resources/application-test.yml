@@ -40,7 +40,7 @@ spring:
   codec:
     maxInMemorySize: 10MB
   datasource:
-    url: jdbc:postgresql://${DB_HOST:localhost:5432}/${DB_NAME:kdr}?currentSchema=${DB_SCHEMA:crud_app}
+    url: jdbc:postgresql://${DB_HOST:localhost:5432}/${DB_NAME:crud}?currentSchema=${DB_SCHEMA:crud_app}
     hikari:
       pool-name: spring-hikari
       username: ${DB_USERNAME:crud_app}

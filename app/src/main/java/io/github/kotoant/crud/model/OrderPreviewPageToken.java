@@ -2,6 +2,7 @@ package io.github.kotoant.crud.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jooq.JSONB;
+import org.jooq.exception.DataTypeException;
 import org.jooq.jackson.extensions.converters.JSONBtoJacksonConverter;
 
 import java.nio.charset.StandardCharsets;
@@ -21,7 +22,11 @@ public record OrderPreviewPageToken(
         if (token == null) {
             return null;
         }
-        return CONVERTER.from(JSONB.jsonb(new String(Base64.getDecoder().decode(token), StandardCharsets.UTF_8)));
+        try {
+            return CONVERTER.from(JSONB.jsonb(new String(Base64.getDecoder().decode(token), StandardCharsets.UTF_8)));
+        } catch (DataTypeException e) {
+            return null;
+        }
     }
 
     public static String toToken(OrderPreviewPageToken token) {

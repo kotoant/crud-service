@@ -9,7 +9,7 @@ import java.util.UUID;
 @Builder(toBuilder = true)
 @Schema(description = "Превью заказа")
 public record OrderPreviewDto(
-        @Schema(description = "Дата и время создания заказа")
+        @Schema(description = "Дата и время создания заказа", example = "12:08, 23.10.2023")
         String created,
         @Schema(description = "Идентификатор заказа", format = "UUID", example = "609c8abc-0882-485c-a03c-272032a41132")
         UUID id,

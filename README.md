@@ -1,5 +1,7 @@
 # crud-service
 
+[![Build Status][build-status-image]][build-status-link]
+
 Воркшоп «Разрабатываем и тестируем CRUD-сервис».
 
 В рамках воркшопа разберем полный цикл разработки и тестирования CRUD-сервиса. Сам сервис реализуем на Spring, логику
@@ -261,3 +263,6 @@ Swagger UI здесь: [http://localhost:8080/crud/swagger-ui/index.html](http:/
 OpenAPI файл в json формате доступен по
 адресу [http://localhost:8080/crud/v3/api-docs](http://localhost:8080/crud/v3/api-docs),
 в yaml формате - [http://localhost:8080/crud/v3/api-docs.yaml](http://localhost:8080/crud/v3/api-docs.yaml).
+
+[build-status-image]: https://github.com/kotoant/crud-service/actions/workflows/maven-build.yml/badge.svg
+[build-status-link]: https://github.com/kotoant/crud-service/actions/workflows/maven-build.yml

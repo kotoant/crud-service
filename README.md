@@ -1,6 +1,23 @@
 # crud-service
 
-Workshop "Developing and testing a CRUD service"
+Воркшоп «Разрабатываем и тестируем CRUD-сервис».
+
+В рамках воркшопа разберем полный цикл разработки и тестирования CRUD-сервиса. Сам сервис реализуем на Spring, логику
+работы базы данных – на Jooq. Для локального запуска и тестирования будем использовать PostgreSQL и Testcontainers.
+Схему и изменения кода базы данных будем накатывать с помощью Liquibase. На воркшопе будет продемонстрирована
+Keyset-реализация постраничного отображения данных, которая в отличие от Offset-реализации работает одинаково эффективно
+вне зависимости от номера отображаемой страницы.
+
+# Полезные ссылки
+
+1. Илья Сазонов и Федор Сазонов — Offset и keyset: почём пагинация для продакшена?
+   [Видео](https://www.youtube.com/watch?v=wi6h9ox1wwM),
+   [Описание](https://jpoint.ru/talks/7c6a25d123b441c68a48c1da157e3f38/),
+   [PDF](https://squidex.jugru.team/api/assets/srm/cea09505-41f2-4df7-8024-cafe1fa5dd87/ilsya-i-fedor-sazonovy.pdf).
+2. Иван Пономарёв — Скрытая сложность повседневной задачи: отображение табличных данных
+   [Видео](https://www.youtube.com/watch?v=h5PpZxYsEvc),
+   [Описание](https://2017.jpoint.ru/talks/hidden-complexity-of-a-routine-task-presenting-table-data-in-user-interface/),
+   [PDF](https://assets.contentful.com/oxjq45e8ilak/7EAbhXIGD6gAi0q2cC8cwI/c99868730d5ec430c3f8cc2bf4f6e776/Ivan_Ponomarev_Hidden_complexity_of_a_routine_task_presenting_table_data_in_user_interface.pdf).
 
 ## План воркшопа
 
@@ -50,9 +67,9 @@ Workshop "Developing and testing a CRUD service"
 * Maven 3 - https://maven.apache.org/download.cgi
 * Docker - https://www.docker.com/get-started
 
-## Установка для MacOS
+## Установка для MacOS / Linux / Cygwin (Windows)
 
-* Homebrew - https://brew.sh/
+* Homebrew (только для MacOS) - https://brew.sh/
 
 ```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
@@ -63,6 +80,8 @@ Update server.' во время установки macos command line tools вы
 Xcode отсюда https://developer.apple.com/downloads/index.action
 
 * Git LFS
+
+Для MacOS:
 
 ```
 brew install git-lfs
@@ -169,6 +188,8 @@ testcontainers - а именно создать в домашней директ
 testcontainers.reuse.enable=true
 ```
 
+Для `Windows` домашняя директория находится обычно здесь: `C:\Users\yourusername`.
+
 Чтобы принудительно погасить контейнер при сборке на фазе clean можно активировать профиль
 stop-and-remove-testcontainers:
 
@@ -177,6 +198,11 @@ stop-and-remove-testcontainers:
 Также можно погасить запущенный контейнер через скрипт:
 
 `./scripts/stop-and-remove-testcontainers.sh`
+
+Для работы bash-скриптов в `Windows` команды нужно запускать в оболочке `cygwin` (или `mingw`). Чтобы команды работали
+прямо в
+терминале Intellij IDEA можно в настройках `Tools -> Terminal` указать в качестве `Shell path` путь до `bash.exe` из
+`cygwin` (или `mingw`).
 
 #### Локальный запуск приложения
 
@@ -208,9 +234,11 @@ DB_HOST=localhost:32822
 
 1. Modify Options
 2. Add before launch task
-3. External Tool: выбрать скрипт `./scripts/calc-local-docker-env.sh`
+3. External Tool: выбрать скрипт `./scripts/calc-local-docker-env.sh` (для `Windows` выбрать `bash.exe` из cygwin/mingw
+   и в
+   качестве аргумента - путь к скрипту)
 4. Enable EnvFile
-5. Выбрать ранее сгенерированный скрипт `/scripts/local.env`
+5. Выбрать ранее сгенерированный скрипт `scripts/local.env`
 
 ![alt local-run](local-run.png)
 

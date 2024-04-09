@@ -3,6 +3,7 @@
 [![Build Status][build-status-image]][build-status-link]
 
 Воркшоп «Разрабатываем и тестируем CRUD-сервис».
+Видео-запись воркшопа на [YouTube](https://www.youtube.com/watch?v=M_qeoqZ1UAs).
 
 В рамках воркшопа разберем полный цикл разработки и тестирования CRUD-сервиса. Сам сервис реализуем на Spring, логику
 работы базы данных – на Jooq. Для локального запуска и тестирования будем использовать PostgreSQL и Testcontainers.
